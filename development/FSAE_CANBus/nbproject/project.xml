@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>hello_world</name>
+            <name>FSAE_CANBus</name>
             <creation-uuid>fc24a70a-e3dc-4f11-af58-10a2990ab60b</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>

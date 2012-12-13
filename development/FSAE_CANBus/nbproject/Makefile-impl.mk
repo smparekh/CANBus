@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=hello_world.X
+PROJECTNAME=FSAE_CANBus
 
 # Active Configuration
 DEFAULTCONF=default
