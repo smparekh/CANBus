@@ -1,3 +1,4 @@
--Add ON/Automatic (RPM>500) logging
--Make logging a separate VI
+-Add ON/Automatic (RPM>500) logging - done 2/25/2013
+-Make logging a separate VI - done 2/25/2013
 -Range Test
+-Power Test - done 2/24/2013
