@@ -10,6 +10,7 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="Prelog_SubVI.vi" Type="VI" URL="../Prelog_SubVI.vi"/>
 		<Item Name="Scratch.vi" Type="VI" URL="../Scratch.vi"/>
 		<Item Name="VTM_WT1.vi" Type="VI" URL="../VTM_WT1.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
