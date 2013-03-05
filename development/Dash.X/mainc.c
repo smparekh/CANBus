@@ -79,18 +79,31 @@ void main()
     OSCCON = 0xFC;
     OSCTUNEbits.PLLEN = 1; // 4x the clock speed in the previous line
     /*                               */
+    // Set Port to Input
+    TRISBbits.RB4 = 1;
     // Set Port to Output
-    TRISB = 0;
-    // Clear PortB
-    PORTB = 0x00;
+    TRISBbits.RB0 = 0;
+    TRISBbits.RB1 = 0;
+    // Clear PortB Setting individual ports because we set ports individualy
+    PORTBbits.RB0 = 0x00;
+    PORTBbits.RB4 = 0x00;
+    PORTBbits.RB1 = 0x00;
     while(1)
     {
         // Turn on PORTB
-        PORTB = 0xFF;
+        // Set individual PORTB = 0xFF;
+        if (PORTBbits.RB4 == 0)
+        {
+            PORTBbits.AN10 = 1;
+            PORTBbits.AN8 = 1;
+        }
+        else
+        {
+          PORTBbits.AN8 = 0;
+        }
         // Delay for 10000*100000 = 1000000000 (.125s) Clock cycles
-        Delay10KTCYx(100000);
+        //Delay10KTCYx(100000);
         // Turn of PORTB
-        PORTB = 0x00;
         // Delay again
         Delay10KTCYx(100000);
     }
