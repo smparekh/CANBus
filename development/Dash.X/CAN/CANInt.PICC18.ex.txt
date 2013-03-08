@@ -1,0 +1,59 @@
+#include  <pic18.h>
+#include "can.h"
+
+#define I_WANT_DISABLE_CAN_MODULE 0
+
+void interrupt HighISR(void)
+{
+	CANISR();
+}
+
+void main()			//Main entry
+{
+	struct CANMessage RX_Message, TX_Message;	//Declare one message structure for transmission and one for reception
+	char i, I_Have_Something_To_Send = 0;		
+	CANInit();			//Initialize CAN module
+	GIE = 1;			//Enable interrupts
+	PEIE = 1;		
+	while(1)
+	{
+		if(CANRXMessageIsPending())	//Check if there is an unread CAN message
+		{
+			RX_Message = CANGet();	//Get the message
+			if(RX_Message.Remote == 1 && RX_Message.Address == MY_ADDRESS_IDENTIFIER)
+			{						//Check if it was a Remote Transmission Request message and My Identifier
+				I_Have_Something_To_Send = 1;	//Set the send flag
+			}
+		}
+		
+		
+		if(I_Have_Something_To_Send)	
+		{
+			TX_Message.Address = MY_ADDRESS_IDENTIFIER;		//Set the address to My identifier
+#ifdef MY_ADDRESS_IS_STANDARD
+			TX_Message.Ext = 0;								//If the identifier is standard, clear the Ext flag
+#else
+			TX_Message.Ext = 1;								//If the identifier is extended, set the Ext flag
+#endif
+			TX_Message.NoOfBytes = RX_Message.NoOfBytes;	//Set number of bytes to send
+			for(i=0; i<TX_Message.NoOfBytes; i++)			//Fill the Data bytes
+			{
+				TX_Message.Data[i] = i;
+			}
+			TX_Message.Remote = 0;							//clear the remote flag
+			TX_Message.Priority = 0;						//Internal CAN module priority 0-> least priority, 3-> most priority
+			CANPut(TX_Message);								//Put the message in the FIFO
+			I_Have_Something_To_Send = 0;
+		}
+		if(I_WANT_DISABLE_CAN_MODULE)
+		{
+			CANSetMode(CAN_DISABLE_MODE);				//Set a new CAN mode
+		}
+	}	
+}
+
+void CANErrorHandler(void)
+{
+	//If CAN error handler is enabled
+	//Perform error handling code here
+}
