@@ -1,6 +1,10 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <Project Type="Project" LVVersion="12008004">
+	<Property Name="CCSymbols" Type="Str"></Property>
+	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Property Name="NI.Project.Description" Type="Str"></Property>
 	<Item Name="My Computer" Type="My Computer">
+		<Property Name="NI.SortType" Type="Int">3</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -10,7 +14,10 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="Prelog_SubVI.vi" Type="VI" URL="../Prelog_SubVI.vi"/>
+		<Item Name="SubVIs" Type="Folder" URL="../SubVIs">
+			<Property Name="NI.DISK" Type="Bool">true</Property>
+		</Item>
+		<Item Name="favicon.ico" Type="Document" URL="../favicon.ico"/>
 		<Item Name="Scratch.vi" Type="VI" URL="../Scratch.vi"/>
 		<Item Name="VTM_WT1.vi" Type="VI" URL="../VTM_WT1.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
@@ -108,7 +115,6 @@
 				<Item Name="XNET Read.vi" Type="VI" URL="/&lt;vilib&gt;/xnet/xnet.llb/XNET Read.vi"/>
 				<Item Name="XNET Session Info State.ctl" Type="VI" URL="/&lt;vilib&gt;/xnet/xnet.llb/XNET Session Info State.ctl"/>
 			</Item>
-			<Item Name="Logging_SubVI.vi" Type="VI" URL="../Logging_SubVI.vi"/>
 			<Item Name="nixlvapi.dll" Type="Document" URL="nixlvapi.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -134,18 +140,22 @@
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/NI_AB_PROJECTNAME/VTM_WT1/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Source[0].itemID" Type="Str">{252089CE-C218-416C-88DA-6E694130C0C5}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{49D14C50-8F63-4394-901B-574E18AE733F}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/VTM_WT1.vi</Property>
+				<Property Name="Source[1].properties[0].type" Type="Str">Run when opened</Property>
+				<Property Name="Source[1].properties[0].value" Type="Bool">false</Property>
+				<Property Name="Source[1].propertiesCount" Type="Int">1</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
 				<Property Name="SourceCount" Type="Int">2</Property>
-				<Property Name="TgtF_fileDescription" Type="Str">VTM_WT1</Property>
+				<Property Name="TgtF_companyName" Type="Str">Virginia Tech Motorsports</Property>
+				<Property Name="TgtF_fileDescription" Type="Str">Viriginia Tech Motorsports Wireless Telemetry VI</Property>
 				<Property Name="TgtF_fileVersion.major" Type="Int">1</Property>
 				<Property Name="TgtF_internalName" Type="Str">VTM_WT1</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2013 </Property>
-				<Property Name="TgtF_productName" Type="Str">VTM_WT1</Property>
+				<Property Name="TgtF_productName" Type="Str">VTM_WirelessTelem</Property>
 				<Property Name="TgtF_targetfileGUID" Type="Str">{D5E06372-34B3-4AB6-A96A-2158476E56B5}</Property>
 				<Property Name="TgtF_targetfileName" Type="Str">VTM_WT.exe</Property>
 			</Item>
