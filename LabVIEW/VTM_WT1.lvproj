@@ -17,7 +17,6 @@
 		<Item Name="SubVIs" Type="Folder" URL="../SubVIs">
 			<Property Name="NI.DISK" Type="Bool">true</Property>
 		</Item>
-		<Item Name="favicon.ico" Type="Document" URL="../favicon.ico"/>
 		<Item Name="FuelAnalysis.vi" Type="VI" URL="../FuelAnalysis.vi"/>
 		<Item Name="VTM_WT1.vi" Type="VI" URL="../VTM_WT1.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
