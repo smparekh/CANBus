@@ -72,7 +72,6 @@
 // CONFIG7H
 #pragma config EBTRB = OFF      // Boot Block Table Read Protection bit (Boot block (000000-0007FFh) not protected from table reads executed in other blocks)
 
-
 void main()
 {
     /* Oscillator Configuration Bits */
@@ -88,10 +87,14 @@ void main()
     PORTBbits.RB0 = 0x00;
     PORTBbits.RB4 = 0x00;
     PORTBbits.RB1 = 0x00;
+
     while(1)
     {
         // Turn on PORTB
         // Set individual PORTB = 0xFF;
+        
+        
+
         if (PORTBbits.RB4 == 0)
         {
             PORTBbits.AN10 = 1;
@@ -105,7 +108,8 @@ void main()
         //Delay10KTCYx(100000);
         // Turn of PORTB
         // Delay again
-        Delay10KTCYx(100000);
+        Delay10KTCYx(100);
+        
     }
 }
 
