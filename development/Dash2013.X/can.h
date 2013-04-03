@@ -104,9 +104,9 @@
 
 
 //If using normal mode, comment the following line out
-#ifdef LPBACK
-#define USE_LOOPBACK_MODE
-#endif
+//#ifdef LPBACK
+//#define USE_LOOPBACK_MODE
+//#endif
 
 
 //Size of RX buffer (14 bytes per buffer entry) has to be greater than or equal to 2

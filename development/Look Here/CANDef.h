@@ -21,7 +21,7 @@
 #error "Number of samples is out of range"
 #endif
 #define CAN_CONFIG_3 PH_SEG_2-1
-#define RXMASK0 2047
+#define RXMASK0 0x7FF
 #define RXMASK1 0
 #define RXFILT0 0
 #define ST_FILTER_0

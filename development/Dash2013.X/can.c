@@ -550,6 +550,7 @@ void CANGetMessage(void)
 	{
 		RXMessage[RXWPtr].Data[i] = *(unsigned char *)(0xF60+i);
 	}
+
 	RXB0FUL = 0;
 }
 
