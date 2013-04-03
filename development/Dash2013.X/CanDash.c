@@ -55,7 +55,7 @@ void SetCanConfigMode(int configmode)
 void initialize_can(void)
 {
      CANOpen(0x00,0xbc,0x01); //set it to 1Mbits per sec
-     CANISR();
+     //CANISR();
      //Set Interupts
      SetCanConfigMode(CAN_NORMAL_MODE);
 }

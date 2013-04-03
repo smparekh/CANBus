@@ -20,7 +20,6 @@ void main() {
     {
      struct CANMessage canmessage;
      canmessage = CANGet();
-      
 
     }
 

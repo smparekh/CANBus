@@ -6,12 +6,12 @@
 *       The user is advised not to make any         *
 *       changes to this file                        *
 ****************************************************/
-#define BAUD_RATE_PRESC 4
+#define BAUD_RATE_PRESC 64
 #define SJW_TIME 1
 #define SAMPLES 1
 #define PROP_TIME 1
-#define PH_SEG_1 1
-#define PH_SEG_2 1
+#define PH_SEG_1 3
+#define PH_SEG_2 3
 #define CAN_CONFIG_1 BAUD_RATE_PRESC-1|(SJW_TIME-1<<6)
 #if SAMPLES == 1
 #define CAN_CONFIG_2 0x80|(PH_SEG_1-1<<3)|(PROP_TIME-1)
@@ -21,7 +21,7 @@
 #error "Number of samples is out of range"
 #endif
 #define CAN_CONFIG_3 PH_SEG_2-1
-#define RXMASK0 0
+#define RXMASK0 2047
 #define RXMASK1 0
 #define RXFILT0 0
 #define ST_FILTER_0

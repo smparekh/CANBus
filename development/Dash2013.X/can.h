@@ -1,35 +1,35 @@
 /*********************************************************************
  *
  *                           This is the header for CAN.C
- *
+ *   
  *********************************************************************
  * FileName:        CAN.H
  * Dependencies:    CANDef.h
  * Processor:       PIC18FXX8
  * Compiler:        MCC18 v2.20 or higher
  *                  HITECH PICC-18 v8.20PL4 or higher
- * Linker:
+ * Linker:          
  * Company:         Microchip Technology, Inc.
  *
  * Software License Agreement
  *
  * The software supplied herewith by Microchip Technology Incorporated
- * (the "Company") is intended and supplied to you, the Company?s
+ * (the "Company") is intended and supplied to you, the Company’s
  * customer, for use solely and exclusively with products manufactured
- * by the Company.
+ * by the Company. 
  *
- * The software is owned by the Company and/or its supplier, and is
- * protected under applicable copyright laws. All rights are reserved.
- * Any use in violation of the foregoing restrictions may subject the
- * user to criminal sanctions under applicable laws, as well as to
- * civil liability for the breach of the terms and conditions of this
+ * The software is owned by the Company and/or its supplier, and is 
+ * protected under applicable copyright laws. All rights are reserved. 
+ * Any use in violation of the foregoing restrictions may subject the 
+ * user to criminal sanctions under applicable laws, as well as to 
+ * civil liability for the breach of the terms and conditions of this 
  * license.
-
- * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES,
- * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
- * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
- * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ 
+ * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES, 
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED 
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT, 
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR 
  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  *
@@ -38,12 +38,12 @@
  * Author               Date        Comment
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Thomas Castmo        06/07/2003  Initial release
- * Thomas Castmo        07/07/2003  Cleared up a bit and implemented
- *                                  the window function CANCON<3:1>
+ * Thomas Castmo        07/07/2003  Cleared up a bit and implemented 
+ *                                  the window function CANCON<3:1> 
  *                                  for interrupts
  * Thomas Castmo        16/07/2003  Added support for the Microchip
  *                                  MPLAB C18 compiler
- *
+ * 
  ********************************************************************/
 #ifndef __CAN_H
 #define __CAN_H
@@ -118,7 +118,7 @@
 #if TXBUF < 2 || RXBUF < 2
 #error "The RXbuffer and TXbuffer has to greater than or equal to 2"
 #endif
-
+	
 //CAN message structure (one message is 15 bytes wide)
 struct CANMessage {
 	unsigned long Address;
@@ -129,10 +129,10 @@ struct CANMessage {
 	unsigned Remote:1;
 };
 
-//#define CAN_LISTEN_MODE 0x7F
-//#define CAN_LOOPBACK_MODE 0x5F
-//#define CAN_DISABLE_MODE 0x3F
-//#define CAN_NORMAL_MODE 0x1F
+#define CAN_LISTEN_MODE 0x7F 
+#define CAN_LOOPBACK_MODE 0x5F 
+#define CAN_DISABLE_MODE 0x3F  
+#define CAN_NORMAL_MODE 0x1F
 
 
 
@@ -150,10 +150,10 @@ struct CANMessage {
  * Overview:        Sets up the appropriate register for the device to act
  *                  as a CAN node
  *
- * Note:            Input values 0x03, 0xAA, 0x05 at Fosc = 16MHz works with
+ * Note:            Input values 0x03, 0xAA, 0x05 at Fosc = 16MHz works with 
  *                  the default firmware at nodeB on the CAN I/O expander board.
  ********************************************************************/
-char CANOpen(unsigned char, unsigned char, unsigned char);
+char CANOpen(unsigned char, unsigned char, unsigned char);	
 
 
 /*********************************************************************
@@ -167,7 +167,7 @@ char CANOpen(unsigned char, unsigned char, unsigned char);
  *
  * Side Effects:    Will modify the RX/TX Buffer registers´ Write/Read pointers
  *
- * Overview:        Checks if a CAN reception/transmission was complete
+ * Overview:        Checks if a CAN reception/transmission was complete 
  *                  and if so write/read to the CAN RX/TX FIFO buffers
  *
  * Note:            This function is supposed to be called from the ISR
@@ -183,8 +183,8 @@ void CANISR(void);
  * Input:           A CAN message
  *
  * Output:          1 -> Failed to put a CAN on the buffer, buffer is full
- *                  0 -> The CAN message is put on the buffer and will be
- *                       transmitted eventually
+ *                  0 -> The CAN message is put on the buffer and will be 
+ *                       transmitted eventually 
  *
  * Side Effects:    Will modify the TX Buffer register´s Write pointer
  *
@@ -222,7 +222,7 @@ char CANRXMessageIsPending(void);
  * Function:        struct CANMessage CANGet(void)
  *
  * PreCondition:    An unread message has to be in the buffer
- *                  use RXCANMessageIsPending(void) prior to
+ *                  use RXCANMessageIsPending(void) prior to 
  *                  calling this function in order to determine
  *                  if an unread message is pending.
  *

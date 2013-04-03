@@ -45,11 +45,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/CanDash.o ${OBJECTDIR}/can.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/CanDash.o.d ${OBJECTDIR}/can.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/CanDash.o ${OBJECTDIR}/can.o ${OBJECTDIR}/Interupts.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/CanDash.o.d ${OBJECTDIR}/can.o.d ${OBJECTDIR}/Interupts.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/CanDash.o ${OBJECTDIR}/can.o
+OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/CanDash.o ${OBJECTDIR}/can.o ${OBJECTDIR}/Interupts.o
 
 
 CFLAGS=
@@ -101,6 +101,13 @@ ${OBJECTDIR}/can.o: can.c  nbproject/Makefile-${CND_CONF}.mk
 	@${DEP_GEN} -d ${OBJECTDIR}/can.o 
 	@${FIXDEPS} "${OBJECTDIR}/can.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
+${OBJECTDIR}/Interupts.o: Interupts.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/Interupts.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Interupts.o   Interupts.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/Interupts.o 
+	@${FIXDEPS} "${OBJECTDIR}/Interupts.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
 else
 ${OBJECTDIR}/Main.o: Main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -122,6 +129,13 @@ ${OBJECTDIR}/can.o: can.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/can.o   can.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/can.o 
 	@${FIXDEPS} "${OBJECTDIR}/can.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/Interupts.o: Interupts.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/Interupts.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION)   -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Interupts.o   Interupts.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/Interupts.o 
+	@${FIXDEPS} "${OBJECTDIR}/Interupts.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 endif
 

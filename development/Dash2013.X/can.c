@@ -1,36 +1,35 @@
-
 /*********************************************************************
  *
  *   This file contains CAN drivers for PIC18Fxx8 devices
- *
+ *   
  *********************************************************************
  * FileName:        CAN.C
  * Dependencies:    CAN.H, PIC18.H or P18CXXX.H
  * Processor:       PIC18FXX8
  * Compiler:        MCC18 v2.20 or higher
  *                  HITECH PICC-18 v8.20PL4 or higher
- * Linker:
+ * Linker:          
  * Company:         Microchip Technology, Inc.
  *
  * Software License Agreement
  *
  * The software supplied herewith by Microchip Technology Incorporated
- * (the "Company") is intended and supplied to you, the Company?s
+ * (the "Company") is intended and supplied to you, the Company’s
  * customer, for use solely and exclusively with products manufactured
- * by the Company.
+ * by the Company. 
  *
- * The software is owned by the Company and/or its supplier, and is
- * protected under applicable copyright laws. All rights are reserved.
- * Any use in violation of the foregoing restrictions may subject the
- * user to criminal sanctions under applicable laws, as well as to
- * civil liability for the breach of the terms and conditions of this
+ * The software is owned by the Company and/or its supplier, and is 
+ * protected under applicable copyright laws. All rights are reserved. 
+ * Any use in violation of the foregoing restrictions may subject the 
+ * user to criminal sanctions under applicable laws, as well as to 
+ * civil liability for the breach of the terms and conditions of this 
  * license.
-
- * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES,
- * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
- * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
- * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ 
+ * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES, 
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED 
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT, 
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR 
  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  *
@@ -39,12 +38,12 @@
  * Author               Date        Comment
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Thomas Castmo        06/07/2003  Initial release
- * Thomas Castmo        07/07/2003  Cleared up a bit and implemented
- *                                  the window function CANCON<3:1>
+ * Thomas Castmo        07/07/2003  Cleared up a bit and implemented 
+ *                                  the window function CANCON<3:1> 
  *                                  for interrupts
  * Thomas Castmo        16/07/2003  Added support for the Microchip
  *                                  MPLAB C18 compiler
- *
+ * 
  ********************************************************************/
 #include "can.h"
 
@@ -101,9 +100,9 @@
 
 
 #define CONFIG_MODE 0x9F
-#define LISTEN_MODE 0x7F
-#define LOOPBACK_MODE 0x5F
-#define DISABLE_MODE 0x3F
+#define LISTEN_MODE 0x7F 
+#define LOOPBACK_MODE 0x5F 
+#define DISABLE_MODE 0x3F  
 #define NORMAL_MODE 0x1F
 #define MODE_MASK 0xE0
 
@@ -297,7 +296,7 @@ void CANGetMessage(void);
  * Side Effects:    Will modify the TX buffer´s Read pointer (TXRPtr)
  *
  * Overview:        Checks if there is any messages to transmit and if so
- *                  place it in the registers reflected by <WIN2:WIN0>
+ *                  place it in the registers reflected by <WIN2:WIN0> 
  *
  * Note:            None
  ********************************************************************/
@@ -317,7 +316,7 @@ void CANGetMessage(void);
  * Overview:        Sets up the appropriate register for the device to act
  *                  as a CAN node
  *
- * Note:            Input values 0x03, 0xAA, 0x05 at Fosc = 16MHz works with
+ * Note:            Input values 0x03, 0xAA, 0x05 at Fosc = 16MHz works with 
  *                  the default firmware at nodeB on the CAN I/O expander board.
  ********************************************************************/
 char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3)
@@ -332,16 +331,16 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	BRGCON1 = CONFIG1;
 	BRGCON2 = CONFIG2;
 	BRGCON3 = CONFIG3;
-
-	RXB0CON = 0x04;					//Receive all valid messages receive buffer overflow
+	
+	RXB0CON = 0x04;					//Receive all valid messages receive buffer overflow 
 	RXB1CON = 0x00;					//writes to RXB1
-
+	
 	//Set the acceptance filters for all the filters
 #ifdef ACCEPT_STANDARD_FILTER_0
 	RXF0SIDL = (unsigned char)(ACCEPTANCE_FILTER_0 << 5);
 	RXF0SIDH = (unsigned char)(ACCEPTANCE_FILTER_0 >> 3);
 #else
-	RXF0EIDL = (unsigned char)(ACCEPTANCE_FILTER_0 & 0xFF);
+	RXF0EIDL = (unsigned char)(ACCEPTANCE_FILTER_0 & 0xFF);	
 	RXF0EIDH = (unsigned char)((ACCEPTANCE_FILTER_0 >> 8) & 0xFF);
 	RXF0SIDL = (unsigned char)((ACCEPTANCE_FILTER_0 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_0 >> 13) & 0xE0) | 0x08;
 	RXF0SIDH = (unsigned char)((ACCEPTANCE_FILTER_0 >> 21) & 0xFF);
@@ -350,7 +349,7 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	RXF1SIDL = (unsigned char)(ACCEPTANCE_FILTER_1 << 5);
 	RXF1SIDH = (unsigned char)(ACCEPTANCE_FILTER_1 >> 3);
 #else
-	RXF1EIDL = (unsigned char)(ACCEPTANCE_FILTER_1 & 0xFF);
+	RXF1EIDL = (unsigned char)(ACCEPTANCE_FILTER_1 & 0xFF);	
 	RXF1EIDH = (unsigned char)((ACCEPTANCE_FILTER_1 >> 8) & 0xFF);
 	RXF1SIDL = (unsigned char)((ACCEPTANCE_FILTER_1 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_1 >> 13) & 0xE0) | 0x08;
 	RXF1SIDH = (unsigned char)((ACCEPTANCE_FILTER_1 >> 21) & 0xFF);
@@ -360,7 +359,7 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	RXF2SIDL = (unsigned char)(ACCEPTANCE_FILTER_2 << 5);
 	RXF2SIDH = (unsigned char)(ACCEPTANCE_FILTER_2 >> 3);
 #else
-	RXF2EIDL = (unsigned char)(ACCEPTANCE_FILTER_2 & 0xFF);
+	RXF2EIDL = (unsigned char)(ACCEPTANCE_FILTER_2 & 0xFF);	
 	RXF2EIDH = (unsigned char)((ACCEPTANCE_FILTER_2 >> 8) & 0xFF);
 	RXF2SIDL = (unsigned char)((ACCEPTANCE_FILTER_2 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_2 >> 13) & 0xE0) | 0x08;
 	RXF2SIDH = (unsigned char)((ACCEPTANCE_FILTER_2 >> 21) & 0xFF);
@@ -370,7 +369,7 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	RXF3SIDL = (unsigned char)(ACCEPTANCE_FILTER_3 << 5);
 	RXF3SIDH = (unsigned char)(ACCEPTANCE_FILTER_3 >> 3);
 #else
-	RXF3EIDL = (unsigned char)(ACCEPTANCE_FILTER_3 & 0xFF);
+	RXF3EIDL = (unsigned char)(ACCEPTANCE_FILTER_3 & 0xFF);	
 	RXF3EIDH = (unsigned char)((ACCEPTANCE_FILTER_3 >> 8) & 0xFF);
 	RXF3SIDL = (unsigned char)((ACCEPTANCE_FILTER_3 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_3 >> 13) & 0xE0) | 0x08;
 	RXF3SIDH = (unsigned char)((ACCEPTANCE_FILTER_3 >> 21) & 0xFF);
@@ -380,7 +379,7 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	RXF4SIDL = (unsigned char)(ACCEPTANCE_FILTER_4 << 5);
 	RXF4SIDH = (unsigned char)(ACCEPTANCE_FILTER_4 >> 3);
 #else
-	RXF4EIDL = (unsigned char)(ACCEPTANCE_FILTER_4 & 0xFF);
+	RXF4EIDL = (unsigned char)(ACCEPTANCE_FILTER_4 & 0xFF);	
 	RXF4EIDH = (unsigned char)((ACCEPTANCE_FILTER_4 >> 8) & 0xFF);
 	RXF4SIDL = (unsigned char)((ACCEPTANCE_FILTER_4 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_4 >> 13) & 0xE0) | 0x08;
 	RXF4SIDH = (unsigned char)((ACCEPTANCE_FILTER_4 >> 21) & 0xFF);
@@ -390,18 +389,18 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	RXF5SIDL = (unsigned char)(ACCEPTANCE_FILTER_5 << 5);
 	RXF5SIDH = (unsigned char)(ACCEPTANCE_FILTER_5 >> 3);
 #else
-	RXF5EIDL = (unsigned char)(ACCEPTANCE_FILTER_5 & 0xFF);
+	RXF5EIDL = (unsigned char)(ACCEPTANCE_FILTER_5 & 0xFF);	
 	RXF5EIDH = (unsigned char)((ACCEPTANCE_FILTER_5 >> 8) & 0xFF);
 	RXF5SIDL = (unsigned char)((ACCEPTANCE_FILTER_5 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_FILTER_4 >> 13) & 0xE0) | 0x08;
 	RXF5SIDH = (unsigned char)((ACCEPTANCE_FILTER_5 >> 21) & 0xFF);
 #endif
 
 //Set the acceptance masks
-	RXM0EIDL = (unsigned char)(ACCEPTANCE_MASK_0_1 & 0xFF);
+	RXM0EIDL = (unsigned char)(ACCEPTANCE_MASK_0_1 & 0xFF);	
 	RXM0EIDH = (unsigned char)((ACCEPTANCE_MASK_0_1 >> 8) & 0xFF);
 	RXM0SIDL = (unsigned char)((ACCEPTANCE_MASK_0_1 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_MASK_0_1 >> 13) & 0xE0) | 0x08;
 	RXM0SIDH = (unsigned char)((ACCEPTANCE_MASK_0_1 >> 21) & 0xFF);
-	RXM1EIDL = (unsigned char)(ACCEPTANCE_MASK_2_5 & 0xFF);
+	RXM1EIDL = (unsigned char)(ACCEPTANCE_MASK_2_5 & 0xFF);	
 	RXM1EIDH = (unsigned char)((ACCEPTANCE_MASK_2_5 >> 8) & 0xFF);
 	RXM1SIDL = (unsigned char)((ACCEPTANCE_MASK_2_5 >> 16) & 0x03) | (unsigned char)((ACCEPTANCE_MASK_2_5 >> 13) & 0xE0) | 0x08;
 	RXM1SIDH = (unsigned char)((ACCEPTANCE_MASK_2_5 >> 21) & 0xFF);
@@ -440,7 +439,7 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
 	TXB0CON = 0x00;												//Initiate transmission
 	TXB0REQ = 1;
 #endif
-
+	
 	return 0;
 }
 
@@ -454,10 +453,10 @@ char CANOpen(unsigned char CONFIG1, unsigned char CONFIG2, unsigned char CONFIG3
  *
  * Output:          None
  *
- * Side Effects:    Will modify the RX/TX interrupt flags
+ * Side Effects:    Will modify the RX/TX interrupt flags 
  *                  and interrupt enable bits
  *
- * Overview:        Checks if a CAN reception/transmission was complete
+ * Overview:        Checks if a CAN reception/transmission was complete 
  *                  and if so write/read to the CAN RX/TX FIFO buffers
  *
  * Note:            This function is supposed to be called from the ISR
@@ -469,7 +468,7 @@ void CANISR(void)
 	if(PIR3 & PIE3)
 	{
 		TempCANCON = CANCON;
-
+		
 		if(RXB0IF && RXB0IE)
 		{
 			RXB0IF = 0;		//Clear interrupt flag
@@ -502,7 +501,7 @@ void CANISR(void)
 		{
 			CANCON = CANCON & 0xF0 | TXB2Interrupt;
 			if(CANPutMessage())			//if there wasn't any more messages to send
-				TXB2IE = 0;				//disable interrupts for TXB2 and leave TXB2IF
+				TXB2IE = 0;				//disable interrupts for TXB2 and leave TXB2IF 
 			else						//still on so PutCAN() can reenable the interrupt and instantly vector to ISR
 				TXB2IF = 0;				//message was sent, just clear the interrupt flag.
 		}
@@ -511,7 +510,7 @@ void CANISR(void)
 			ERRIF = 0;			//Clear interrupt flag
 #ifdef CAN_ERROR_HANDLER_ENABLE
 			CANErrorHandler();
-#endif
+#endif			
 								//No error handler implemented!!!
 		}
 		else if(WAKIF && WAKIE)
@@ -546,7 +545,7 @@ void CANGetMessage(void)
 	unsigned char i;
 	if(++RXWPtr >= RXBUF)		//If pointer overflowed
 		RXWPtr = 0;				//Clear it
-
+	
 	for(i=0;i<14;i++)
 	{
 		RXMessage[RXWPtr].Data[i] = *(unsigned char *)(0xF60+i);
@@ -569,7 +568,7 @@ void CANGetMessage(void)
  * Side Effects:    Will modify the TX buffer´s Read pointer (TXRPtr)
  *
  * Overview:        Checks if there is any messages to transmit and if so
- *                  place it in the registers reflected by <WIN2:WIN0>
+ *                  place it in the registers reflected by <WIN2:WIN0> 
  *
  * Note:            None
  ********************************************************************/
@@ -598,8 +597,8 @@ char CANPutMessage(void)
  * Input:           A CAN message
  *
  * Output:          1 -> Failed to put a CAN on the buffer, buffer is full
- *                  0 -> The CAN message is put on the buffer and will be
- *                       transmitted eventually
+ *                  0 -> The CAN message is put on the buffer and will be 
+ *                       transmitted eventually 
  *
  * Side Effects:    Will modify the TX Buffer register´s Write pointer
  *
@@ -614,7 +613,7 @@ char CANPut(struct CANMessage Message)
 	unsigned char TempPtr, i;
 	if(TXWPtr == TXRPtr-1 || (TXWPtr == TXBUF-1 && TXRPtr == 0))	//if all transmit buffers are full return 1
 		return 1;
-
+		
 	//Do not modify the TX pointer until the message has been successfully copied so the CANISR don't
 	//send a message that isn't ready
 	if(TXWPtr >= TXBUF-1)					//check if transmit write pointer will overflow
@@ -625,16 +624,16 @@ char CANPut(struct CANMessage Message)
 	{
 		TempPtr = TXWPtr+1;							//and postincrement write pointer
 	}
-
+	
 	if(Message.NoOfBytes > 8)					//Ensure we don't handle more than 8 bytes
-		Message.NoOfBytes = 8;
-
+		Message.NoOfBytes = 8;	
+		
 	TXMessage[TempPtr].Specific.TXBDLC.Byte = Message.NoOfBytes;				//Set the data count
 
 	if(!Message.Remote)			//If dataframe
 	{
 		TXMessage[TempPtr].Specific.TXBDLC.Bits.TXRTR = 0;								//Clear the Remote Transfer Request bit
-
+		
 		for(i = 0; i < Message.NoOfBytes; i++)	//Load data registers
 		{
 			TXMessage[TempPtr].Specific.TXBD.Array[i] = Message.Data[i];
@@ -659,7 +658,7 @@ char CANPut(struct CANMessage Message)
 		TXMessage[TempPtr].Specific.TXBSIDL.Bits.EXIDE = 0;
 	}
 	TXMessage[TempPtr].Specific.TXBCON.Byte = Message.Priority & 0x03;	//Set the internal priority of the data frame
-
+	
 	TXWPtr = TempPtr;
 
 	//Reenable an interrupt if it is idle, it doesn't matter if another TX source caught the pending message
@@ -670,7 +669,7 @@ char CANPut(struct CANMessage Message)
 	else if(!TXB1IE)		//else if TXB1 is idle
 		TXB1IE = 1;		//same procedure
 	else if(!TXB2IE)		//finally try TXB2
-		TXB2IE = 1;
+		TXB2IE = 1;	
 
 	return 0;
 }
@@ -709,7 +708,7 @@ char CANRXMessageIsPending(void)
  * Function:        struct CANMessage CANGet(void)
  *
  * PreCondition:    An unread message has to be in the buffer
- *                  use RXCANMessageIsPending(void) prior to
+ *                  use RXCANMessageIsPending(void) prior to 
  *                  calling this function in order to determine
  *                  if an unread message is pending.
  *
@@ -738,20 +737,20 @@ struct CANMessage CANGet(void)
 	{
 		TempPtr = RXRPtr+1;
 	}
-
+	
 	ReturnMessage.NoOfBytes = RXMessage[TempPtr].Specific.RXBDLC.Byte & 0x0F;					//copy data count
 	if(RXMessage[TempPtr].Specific.RXBCON.Bits.RXRTRRO)	//Remote frame request
 	{
 		ReturnMessage.Remote = 1;
 	}
-	else				//Data frame
+	else				//Data frame 
 	{
 		ReturnMessage.Remote = 0;									//Clear remote flag
 		for(i = 0; i < ReturnMessage.NoOfBytes; i++)				//copy data content
 			ReturnMessage.Data[i] = RXMessage[TempPtr].Specific.RXBD.Array[i];
 	}
 	CANCON = CANCON & 0xF0;
-
+	
 	ReturnMessage.Address = (unsigned int)(RXMessage[TempPtr].Specific.RXBSIDH.Byte) << 3;			//Load the standard identifier into the address
 	ReturnMessage.Address |= (RXMessage[TempPtr].Specific.RXBSIDL.Byte >> 5);
 
@@ -759,17 +758,17 @@ struct CANMessage CANGet(void)
 	{
 		ReturnMessage.Ext = 1;										//Set the extended identifier flag
 		ReturnMessage.Address = (ReturnMessage.Address << 2) | (RXMessage[TempPtr].Specific.RXBSIDL.Byte & 0x03);
-		ReturnMessage.Address = ReturnMessage.Address << 16;		//and copy the extended address
+		ReturnMessage.Address = ReturnMessage.Address << 16;		//and copy the extended address 
 		ReturnMessage.Address |= (unsigned int)(RXMessage[TempPtr].Specific.RXBEIDH.Byte) << 8;
-		ReturnMessage.Address |= RXMessage[TempPtr].Specific.RXBEIDL.Byte;
+		ReturnMessage.Address |= RXMessage[TempPtr].Specific.RXBEIDL.Byte;		
 	}
 	else								//Standard identifier
 	{
 		ReturnMessage.Ext = 0;		//clear the extended identifier flag
 	}
-
+	
 	RXRPtr = TempPtr;
-	return ReturnMessage;
+	return ReturnMessage;		
 }
 
 
@@ -799,7 +798,7 @@ void CANSetMode(unsigned char Mode)
 	if(Mode == NORMAL_MODE)
 	{
 		CANCON = (LOOPBACK_MODE & MODE_MASK) | (CANCON & (MODE_MASK ^ 0xFF));
-		while((CANSTAT & MODE_MASK) != (LOOPBACK_MODE & MODE_MASK));
+		while((CANSTAT & MODE_MASK) != (LOOPBACK_MODE & MODE_MASK));	
 	}
 	else
 #endif
