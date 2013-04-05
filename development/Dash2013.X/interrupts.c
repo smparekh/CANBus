@@ -6,7 +6,7 @@ void enable_interrupts(void)
 {
     RCONbits.IPEN = 1;
     INTCONbits.GIEH = 1;
-    INTCONbits.GIEL = 0;
+    INTCONbits.GIEL = 1;
     return;
 }
 
@@ -60,4 +60,5 @@ void InterruptHandlerHigh()
 #pragma interrupt InterruptHandlerLow
 void InterruptHandlerLow()
 {
+    //CANISR();
 }

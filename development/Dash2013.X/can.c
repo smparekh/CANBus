@@ -465,6 +465,7 @@ void CANISR(void)
 {
 	unsigned char TempCANCON;
 
+        PORTBbits.RB5 = 1;
 	if(PIR3 & PIE3)
 	{
 		TempCANCON = CANCON;
@@ -511,7 +512,7 @@ void CANISR(void)
 #ifdef CAN_ERROR_HANDLER_ENABLE
 			CANErrorHandler();
 #endif			
-								//No error handler implemented!!!
+			PORTBbits.RB5 = 1;					//No error handler implemented!!!
 		}
 		else if(WAKIF && WAKIE)
 		{
