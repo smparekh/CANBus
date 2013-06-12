@@ -1,5 +1,5 @@
 #include "timer_func.h"
-
+#include <plib.h>
 static BOOL oneSecondUp;
 static UINT32 msecCounter;
 
@@ -69,7 +69,9 @@ void __attribute__((vector(4), interrupt(ipl4), nomips16)) Timer1InterruptHandle
 
 		oneSecondUp = TRUE;	/* Indicate that one second is up	*/
 		msecCounter = 0;	/* Reset the millisecond counter.	*/
+                mPORTGToggleBits(BIT_14);
 	}
+        
 
 
 }

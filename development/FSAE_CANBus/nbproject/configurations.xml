@@ -9,6 +9,7 @@
       <itemPath>HardwareProfile.h</itemPath>
       <itemPath>I2C.h</itemPath>
       <itemPath>LCD.h</itemPath>
+      <itemPath>UART.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -22,6 +23,7 @@
       <itemPath>timer_func.c</itemPath>
       <itemPath>I2C.c</itemPath>
       <itemPath>LCD.c</itemPath>
+      <itemPath>UART.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -42,7 +44,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PK3OBPlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>1.00</languageToolchainVersion>
+        <languageToolchainVersion>1.21</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>

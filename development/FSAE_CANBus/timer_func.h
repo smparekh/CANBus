@@ -12,7 +12,7 @@
 #include <xc.h>
 
 #define TIMER1_PERIOD 	0x1F40	/* For a 0.1 millisecond interval	*/
-#define ONE_SECOND_MSEC	0x2710	/* For a 1 second timeout in terms 	*/
+#define ONE_SECOND_MSEC	0x03E8	/* For a 1 second timeout in terms 	*/
 								/* of 0.1 milliseconds	*/
 
 /****************************************************************************

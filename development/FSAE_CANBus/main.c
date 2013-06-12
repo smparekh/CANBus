@@ -33,12 +33,18 @@ int main()
     initI2C();
     initLCD();
     
-    CAN1Init();
+//    CAN1Init();
+    initUART();
     Timer1Init();
+    mPORTGDirection(0x0);
+    mPORTGClearBits(BIT_12);
+    mPORTGClearBits(BIT_13);
+    mPORTGClearBits(BIT_14);
+    mPORTGClearBits(BIT_15);
     
     while (1)
     {
-        CAN1RxMsgProcess();
+//        CAN1RxMsgProcess();
     }
     return 0;
 }

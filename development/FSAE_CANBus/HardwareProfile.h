@@ -21,6 +21,7 @@ extern "C" {
 #define LCD_ADDRESS           0x48             // LCD address
 #define I2C_CLOCK_FREQ        100000
 
+#define UART_BAUD_RATE        9600
 
 #ifdef	__cplusplus
 }
