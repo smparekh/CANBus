@@ -15,7 +15,31 @@ void initUART()
     INTSetVectorPriority(INT_VECTOR_UART(UART1), INT_PRIORITY_LEVEL_2);
     INTSetVectorSubPriority(INT_VECTOR_UART(UART1), INT_SUB_PRIORITY_LEVEL_0);
 }
+void WriteString(const char *string)
+{
+    while(*string != '\0')
+    {
+        while(!UARTTransmitterIsReady(UART1))
+            ;
 
+        UARTSendDataByte(UART1, *string);
+
+        string++;
+
+        while(!UARTTransmissionHasCompleted(UART1))
+            ;
+    }
+}
+void PutCharacter(const char character)
+{
+        while(!UARTTransmitterIsReady(UART1));
+
+        UARTSendDataByte(UART1, character);
+
+
+        while(!UARTTransmissionHasCompleted(UART1));
+        mPORTGToggleBits(BIT_12);
+}
 void __ISR(_UART1_VECTOR, ipl2) UART_int_handler(void) {
     // Is this an RX interrupt?
     if (INTGetFlag(INT_SOURCE_UART_RX(UART1))) {
@@ -25,7 +49,9 @@ void __ISR(_UART1_VECTOR, ipl2) UART_int_handler(void) {
         // Do Something with the data
 
         // Toggle LED to indicate UART activity
-        mPORTGToggleBits(BIT_12);
+        mPORTGToggleBits(BIT_15);
+        WriteString("Mike\0");
+
     }
 
     // We don't care about TX interrupt
