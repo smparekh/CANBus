@@ -50,7 +50,7 @@ void __ISR(_UART1_VECTOR, ipl2) UART_int_handler(void) {
 
         // Toggle LED to indicate UART activity
         mPORTGToggleBits(BIT_15);
-        WriteString("Mike\0");
+        WriteString("21");
 
     }
 
